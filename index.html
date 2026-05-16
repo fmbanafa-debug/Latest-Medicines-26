@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Interactive Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container:focus-within {
+            ring: 2px solid #3b82f6;
+        }
+
+        .category-pill {
+            transition: all 0.2s ease;
+        }
+
+        .category-pill.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hide scrollbar but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800">
+
+    <header class="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h1 class="text-2xl font-bold text-slate-900 tracking-tight">Medicine Directory</h1>
+                    <p class="text-sm text-slate-500">2025/2026 Pharmaceutical Reference</p>
+                </div>
+                
+                <div class="relative w-full md:w-96">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </span>
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        placeholder="Search by name, category, or code..." 
+                        class="block w-full pl-10 pr-3 py-2 border border-slate-200 rounded-xl leading-5 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition-all"
+                    >
+                </div>
+            </div>
+            
+            <div id="categoryFilters" class="flex gap-2 mt-6 overflow-x-auto no-scrollbar pb-2">
+                <button onclick="filterByCategory('All')" class="category-pill active whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium border border-slate-200 hover:bg-slate-100">
+                    All
+                </button>
+                <!-- Categories will be injected here -->
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <div id="medicineGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Medicine cards will be injected here -->
+        </div>
+
+        <div id="noResults" class="hidden text-center py-20">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-slate-100 mb-4">
+                <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 9.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+            <h3 class="text-lg font-medium text-slate-900">No medicines found</h3>
+            <p class="text-slate-500">Try adjusting your search or filters.</p>
+        </div>
+    </main>
+
+    <script>
+        // Data parsed from the CSV provided
+        const medicineData = [
+            {"Code":"01.01.01","GenericName":"Orforglipron (LY3502970)","Form":"Tablet","Remarks":"First non-peptide oral GLP-1 for obesity; no refrigeration or injections needed.","Category":"Metabolic - Obesity"},
+            {"Code":"01.02.01","GenericName":"Brenzavvy (Bexagliflozin)","Form":"Tablet","Remarks":"Approved 2023; SGLT2 inhibitor for glycemic control in Type 2 Diabetes.","Category":"Metabolic - Diabetes"},
+            {"Code":"01.03.01","GenericName":"Rybelsus (Semaglutide - High Dose)","Form":"Tablet","Remarks":"New 25mg/50mg oral strengths (2025) for intensive diabetes and weight control.","Category":"Metabolic - Diabetes"},
+            {"Code":"01.04.01","GenericName":"Zepbound (Tirzepatide)","Form":"Injection","Remarks":"Dual GIP/GLP-1 agonist approved for chronic weight management.","Category":"Metabolic - Obesity"},
+            {"Code":"01.05.01","GenericName":"Inpefa (Sotagliflozin)","Form":"Tablet","Remarks":"Dual SGLT1/2 inhibitor; reduces heart failure risk in diabetic/CKD patients.","Category":"Metabolic - Heart Failure"},
+            {"Code":"02.01.01","GenericName":"Trychio (Aprocitentan)","Form":"Tablet","Remarks":"First-in-class endothelin receptor antagonist for resistant hypertension.","Category":"Cardiovascular - Hypertension"},
+            {"Code":"02.02.01","GenericName":"Lerochol (Lerodalcibep)","Form":"Injection","Remarks":"Monthly fusion protein (2025) for potent LDL cholesterol reduction.","Category":"Cardiovascular - Lipids"},
+            {"Code":"02.03.01","GenericName":"Myqorzo (Aficamten)","Form":"Capsule","Remarks":"Cardiac myosin inhibitor for symptomatic obstructive hypertrophic cardiomyopathy.","Category":"Cardiovascular - Heart Failure"},
+            {"Code":"03.01.01","GenericName":"Enjaymo (Sutimlimab)","Form":"Infusion","Remarks":"First approved treatment for hemolysis in adults with cold agglutinin disease (CAD).","Category":"Hematology - Rare Blood"},
+            {"Code":"03.02.01","GenericName":"Pyrukynd (Mitapivat)","Form":"Tablet","Remarks":"Pyruvate kinase activator for hemolytic anemia in PK deficiency.","Category":"Hematology - Rare Blood"},
+            {"Code":"04.01.01","GenericName":"Donanemab (Kisunla)","Form":"Infusion","Remarks":"Amyloid-plaque targeting antibody; slows cognitive decline in early Alzheimer’s.","Category":"Neurology - Alzheimer’s"},
+            {"Code":"04.02.01","GenericName":"Qalsody (Tofersen)","Form":"Intrathecal","Remarks":"First treatment targeting a genetic cause of ALS (SOD1 mutation).","Category":"Neurology - ALS"},
+            {"Code":"05.01.01","GenericName":"Filspari (Sparsentan)","Form":"Tablet","Remarks":"Dual endothelin and angiotensin receptor antagonist for IgA nephropathy.","Category":"Nephrology - CKD"},
+            {"Code":"06.01.01","GenericName":"Elahere (Mirvetuximab)","Form":"Infusion","Remarks":"Antibody-drug conjugate for FRα-positive resistant ovarian cancer.","Category":"Oncology - Women's Health"},
+            {"Code":"07.01.01","GenericName":"Eleyele (Sozinibercept)","Form":"Injection","Remarks":"VEGF-C/D inhibitor for combination therapy in wet AMD (prevents vision loss).","Category":"Ophthalmology - Macular"},
+            {"Code":"07.02.01","GenericName":"Vuity (Pilocarpine)","Form":"Eye Drops","Remarks":"First FDA-approved eye drop for age-related blurry near vision (Presbyopia).","Category":"Ophthalmology - Presbyopia"},
+            {"Code":"08.01.01","GenericName":"Journavx (Suzetrigine)","Form":"Tablet","Remarks":"First selective NaV1.8 blocker (2025); non-opioid for acute pain.","Category":"Pain - Non-Opioid"},
+            {"Code":"08.02.01","GenericName":"Adquey (Difamilast)","Form":"Topical","Remarks":"Approved 2026; topical PDE4 inhibitor for mild-to-moderate eczema.","Category":"Dermatology - Eczema"},
+            {"Code":"09.01.01","GenericName":"Vybrique (Sildenafil)","Form":"Oral Film","Remarks":"Approved Feb 2026; rapid-dissolve film for faster onset of action in ED.","Category":"Sexual Health - Erectile Dysfunction"},
+            {"Code":"09.01.02","GenericName":"Hezkue (Sildenafil)","Form":"Oral Spray","Remarks":"Approved 2025/26; liquid oral suspension spray for rapid absorption.","Category":"Sexual Health - Erectile Dysfunction"},
+            {"Code":"09.02.01","GenericName":"Addyi (Flibanserin)","Form":"Tablet","Remarks":"Expanded 2025 approval for libido support in postmenopausal women.","Category":"Sexual Health - Libido"},
+            {"Code":"09.02.02","GenericName":"Vyleesi (Bremelanotide)","Form":"Auto-injector","Remarks":"As-needed melanocortin agonist for female sexual desire distress.","Category":"Sexual Health - Libido"},
+            {"Code":"10.01.01","GenericName":"Aprocitentan (Vascular)","Form":"Tablet","Remarks":"Relaxes endothelial arteries; improves blood flow via endothelin-1 block.","Category":"Vascular - Endothelial Health"},
+            {"Code":"10.01.02","GenericName":"Vericiguat (Vascular)","Form":"Tablet","Remarks":"Enhances Nitric Oxide pathway for arterial relaxation in chronic heart failure.","Category":"Vascular - Endothelial Health"}
+        ];
+
+        let activeCategory = 'All';
+        let searchQuery = '';
+
+        function init() {
+            renderCategories();
+            renderMedicines();
+            
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase();
+                renderMedicines();
+            });
+        }
+
+        function renderCategories() {
+            const categories = ['All', ...new Set(medicineData.map(m => m.Category.split(' - ')[0]))];
+            const filterContainer = document.getElementById('categoryFilters');
+            
+            // Clear but keep 'All'
+            filterContainer.innerHTML = '';
+            
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.className = `category-pill whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium border border-slate-200 hover:bg-slate-100 ${activeCategory === cat ? 'active' : ''}`;
+                btn.innerText = cat;
+                btn.onclick = () => filterByCategory(cat);
+                filterContainer.appendChild(btn);
+            });
+        }
+
+        function filterByCategory(cat) {
+            activeCategory = cat;
+            const buttons = document.querySelectorAll('.category-pill');
+            buttons.forEach(btn => {
+                if (btn.innerText === cat) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+            renderMedicines();
+        }
+
+        function renderMedicines() {
+            const grid = document.getElementById('medicineGrid');
+            const noResults = document.getElementById('noResults');
+            
+            const filtered = medicineData.filter(m => {
+                const matchesCategory = activeCategory === 'All' || m.Category.startsWith(activeCategory);
+                const matchesSearch = 
+                    m.GenericName.toLowerCase().includes(searchQuery) || 
+                    m.Category.toLowerCase().includes(searchQuery) ||
+                    m.Code.toLowerCase().includes(searchQuery) ||
+                    m.Remarks.toLowerCase().includes(searchQuery);
+                
+                return matchesCategory && matchesSearch;
+            });
+
+            grid.innerHTML = '';
+            
+            if (filtered.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            noResults.classList.add('hidden');
+
+            filtered.forEach((m, index) => {
+                const card = document.createElement('div');
+                card.className = 'glass-card rounded-2xl p-6 flex flex-col h-full fade-in';
+                card.style.animationDelay = `${index * 0.05}s`;
+                
+                const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(m.GenericName)}`;
+
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-[10px] font-bold tracking-widest text-blue-500 uppercase">${m.Code}</span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-slate-100 text-slate-600">
+                            ${m.Form}
+                        </span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 leading-tight">${m.GenericName}</h3>
+                    <p class="text-xs font-semibold text-blue-600 mb-4">${m.Category}</p>
+                    <p class="text-sm text-slate-600 line-clamp-3 mb-6 flex-grow">
+                        ${m.Remarks}
+                    </p>
+                    <div class="pt-4 border-t border-slate-100">
+                        <a href="${googleSearchUrl}" target="_blank" class="flex items-center justify-center gap-2 w-full py-2 bg-slate-900 hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition-colors">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12.48 10.92v3.28h7.84c-.24 1.84-2.16 5.42-7.84 5.42-4.9 0-8.9-4.06-8.9-9s4-9 8.9-9c2.8 0 4.67 1.16 5.74 2.2l2.58-2.48C19.1 1.9 16.03 0 12.48 0 5.58 0 0 5.58 0 12.5s5.58 12.5 12.48 12.5c7.2 0 12-5.06 12-12.18 0-.82-.09-1.44-.21-2.07l-11.79.1z"/>
+                            </svg>
+                            Search Info
+                        </a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Run on load
+        window.onload = init;
+    </script>
+</body>
+</html>
