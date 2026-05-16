@@ -179,293 +179,47 @@
 
     <script>
         const medicineData = [
-  {
-    "Code": "01.01.01",
-    "Generic Name": "Orforglipron (LY3502970)",
-    "Form": "Tablet",
-    "Remarks": "First non-peptide oral GLP-1 for obesity; no refrigeration or injections needed.",
-    "Category": "Metabolic - Obesity"
-  },
-  {
-    "Code": "01.02.01",
-    "Generic Name": "Brenzavvy (Bexagliflozin)",
-    "Form": "Tablet",
-    "Remarks": "Approved 2023; SGLT2 inhibitor for glycemic control in Type 2 Diabetes.",
-    "Category": "Metabolic - Diabetes"
-  },
-  {
-    "Code": "01.03.01",
-    "Generic Name": "Rybelsus (Semaglutide - High Dose)",
-    "Form": "Tablet",
-    "Remarks": "New 25mg/50mg oral strengths (2025) for intensive diabetes and weight control.",
-    "Category": "Metabolic - Diabetes"
-  },
-  {
-    "Code": "01.04.01",
-    "Generic Name": "Zepbound (Tirzepatide)",
-    "Form": "Injection",
-    "Remarks": "Dual GIP/GLP-1 agonist approved for chronic weight management.",
-    "Category": "Metabolic - Obesity"
-  },
-  {
-    "Code": "01.05.01",
-    "Generic Name": "Inpefa (Sotagliflozin)",
-    "Form": "Tablet",
-    "Remarks": "Dual SGLT1/2 inhibitor; reduces heart failure risk in diabetic/CKD patients.",
-    "Category": "Metabolic - Heart Failure"
-  },
-  {
-    "Code": "02.01.01",
-    "Generic Name": "Trychio (Aprocitentan)",
-    "Form": "Tablet",
-    "Remarks": "First-in-class endothelin receptor antagonist for resistant hypertension.",
-    "Category": "Cardiovascular - Hypertension"
-  },
-  {
-    "Code": "02.02.01",
-    "Generic Name": "Lerochol (Lerodalcibep)",
-    "Form": "Injection",
-    "Remarks": "Monthly fusion protein (2025) for potent LDL cholesterol reduction.",
-    "Category": "Cardiovascular - Lipids"
-  },
-  {
-    "Code": "02.03.01",
-    "Generic Name": "Myqorzo (Aficamten)",
-    "Form": "Capsule",
-    "Remarks": "Approved late 2025 for symptomatic obstructive hypertrophic cardiomyopathy.",
-    "Category": "Cardiovascular - Heart Muscle"
-  },
-  {
-    "Code": "02.04.01",
-    "Generic Name": "Cardamyst (Etripamil)",
-    "Form": "Nasal Spray",
-    "Remarks": "Approved 2025 for rapid conversion of SVT (fast heart rate) to sinus rhythm.",
-    "Category": "Cardiovascular - Arrhythmia"
-  },
-  {
-    "Code": "02.05.01",
-    "Generic Name": "Obicetrapib",
-    "Form": "Tablet",
-    "Remarks": "Potent CETP inhibitor (2026) for statin-intolerant lipid management.",
-    "Category": "Cardiovascular - Lipids"
-  },
-  {
-    "Code": "03.01.01",
-    "Generic Name": "Orlynvah (Sulopenem)",
-    "Form": "Tablet",
-    "Remarks": "Oral penem antibiotic for uncomplicated urinary tract infections (UTI).",
-    "Category": "Infection - Antibiotic"
-  },
-  {
-    "Code": "03.02.01",
-    "Generic Name": "Nuzolvence (Zoliflodacin)",
-    "Form": "Tablet",
-    "Remarks": "First-in-class antibiotic (Dec 2025) for uncomplicated urogenital gonorrhea.",
-    "Category": "Infection - Antibiotic"
-  },
-  {
-    "Code": "03.03.01",
-    "Generic Name": "Xacduro (Sulbactam/Durlobactam)",
-    "Form": "Injection",
-    "Remarks": "Targeted therapy for hospital-acquired Acinetobacter pneumonia.",
-    "Category": "Infection - Antibiotic"
-  },
-  {
-    "Code": "03.04.01",
-    "Generic Name": "Paxlovid (Nirmatrelvir/Ritonavir)",
-    "Form": "Tablet",
-    "Remarks": "Full FDA approval (2023) for oral treatment of high-risk COVID-19.",
-    "Category": "Infection - Antiviral"
-  },
-  {
-    "Code": "03.05.01",
-    "Generic Name": "Rezzayo (Rezafungin)",
-    "Form": "Injection",
-    "Remarks": "Once-weekly echinocandin for candidemia and invasive candidiasis.",
-    "Category": "Infection - Antifungal"
-  },
-  {
-    "Code": "04.01.01",
-    "Generic Name": "Zavzpret (Zavegepant)",
-    "Form": "Nasal Spray",
-    "Remarks": "First calcitonin gene-related peptide (CGRP) spray for acute migraine.",
-    "Category": "Neurology - Migraine"
-  },
-  {
-    "Code": "04.02.01",
-    "Generic Name": "Cobenfy (Xanomeline/Trospium)",
-    "Form": "Capsule",
-    "Remarks": "Revolutionary muscarinic antipsychotic; lacks common metabolic side effects.",
-    "Category": "Mental Health - Schizophrenia"
-  },
-  {
-    "Code": "04.03.01",
-    "Generic Name": "Bysanti (Milsaperidone)",
-    "Form": "Tablet",
-    "Remarks": "Approved Feb 2026 for schizophrenia and bipolar I disorder episodes.",
-    "Category": "Mental Health - Antipsychotic"
-  },
-  {
-    "Code": "04.04.01",
-    "Generic Name": "Auvelity (Dextromethorphan/Bupropion)",
-    "Form": "Tablet",
-    "Remarks": "Rapid-acting (1-week) oral antidepressant using NMDA antagonism.",
-    "Category": "Mental Health - Depression"
-  },
-  {
-    "Code": "04.05.01",
-    "Generic Name": "Zurzuvae (Zuranolone)",
-    "Form": "Capsule",
-    "Remarks": "First oral, fast-acting (14-day course) for postpartum depression.",
-    "Category": "Mental Health - Depression"
-  },
-  {
-    "Code": "05.01.01",
-    "Generic Name": "Ohtuvayre (Ensifentrine)",
-    "Form": "Inhalation",
-    "Remarks": "First new COPD mechanism (PDE3/4 inhibitor) in over a decade.",
-    "Category": "Respiratory - COPD"
-  },
-  {
-    "Code": "05.02.01",
-    "Generic Name": "Exdensur (Depemokimab)",
-    "Form": "Injection",
-    "Remarks": "Ultra-long-acting IL-5 inhibitor (2025); dosed once every 6 months.",
-    "Category": "Respiratory - Asthma"
-  },
-  {
-    "Code": "05.03.01",
-    "Generic Name": "Airsupra (Albuterol/Budesonide)",
-    "Form": "Inhaler",
-    "Remarks": "First rescue inhaler to treat both symptoms and underlying inflammation.",
-    "Category": "Respiratory - Asthma"
-  },
-  {
-    "Code": "05.04.01",
-    "Generic Name": "Enflonsia (Clesrovimab)",
-    "Form": "Injection",
-    "Remarks": "Approved 2025 for RSV prevention in infants throughout the season.",
-    "Category": "Respiratory - RSV"
-  },
-  {
-    "Code": "05.05.01",
-    "Generic Name": "Jascayd (Nerandomilast)",
-    "Form": "Tablet",
-    "Remarks": "Approved late 2025 for the treatment of Idiopathic Pulmonary Fibrosis.",
-    "Category": "Respiratory - Lung Disease"
-  },
-  {
-    "Code": "06.01.01",
-    "Generic Name": "Veozah (Fezolinetant)",
-    "Form": "Tablet",
-    "Remarks": "Non-hormonal NK3 receptor antagonist for menopausal hot flashes.",
-    "Category": "Women Health - Menopause"
-  },
-  {
-    "Code": "06.02.01",
-    "Generic Name": "Lynkuet (Elinzanetant)",
-    "Form": "Tablet",
-    "Remarks": "Dual NK1/NK3 antagonist (2025) for moderate-to-severe vasomotor symptoms.",
-    "Category": "Women Health - Menopause"
-  },
-  {
-    "Code": "07.01.01",
-    "Generic Name": "Miebo (Perfluorohexyloctane)",
-    "Form": "Eye Drops",
-    "Remarks": "Water-free drop (2023) to target tear evaporation in dry eye.",
-    "Category": "Ophthalmology - Dry Eye"
-  },
-  {
-    "Code": "07.02.01",
-    "Generic Name": "Tryptyr (Acoltremon)",
-    "Form": "Eye Drops",
-    "Remarks": "First-in-class medication (2025) for persistent dry eye symptoms.",
-    "Category": "Ophthalmology - Dry Eye"
-  },
-  {
-    "Code": "07.03.01",
-    "Generic Name": "Vizz (Aceclidine)",
-    "Form": "Eye Drops",
-    "Remarks": "Approved 2025 for the treatment of presbyopia (near vision loss).",
-    "Category": "Ophthalmology - Presbyopia"
-  },
-  {
-    "Code": "08.01.01",
-    "Generic Name": "Journavx (Suzetrigine)",
-    "Form": "Tablet",
-    "Remarks": "First selective NaV1.8 blocker (2025); non-opioid for acute pain.",
-    "Category": "Pain - Non-Opioid"
-  },
-  {
-    "Code": "08.02.01",
-    "Generic Name": "Adquey (Difamilast)",
-    "Form": "Topical",
-    "Remarks": "Approved 2026; topical PDE4 inhibitor for mild-to-moderate eczema.",
-    "Category": "Dermatology - Eczema"
-  },
-  {
-    "Code": "09.01.01",
-    "Generic Name": "Vybrique (Sildenafil)",
-    "Form": "Oral Film",
-    "Remarks": "Approved Feb 2026; rapid-dissolve film for faster onset of action in ED.",
-    "Category": "Sexual Health - Erectile Dysfunction"
-  },
-  {
-    "Code": "09.01.02",
-    "Generic Name": "Hezkue (Sildenafil)",
-    "Form": "Oral Spray",
-    "Remarks": "Approved 2025/26; liquid oral suspension spray for rapid absorption.",
-    "Category": "Sexual Health - Erectile Dysfunction"
-  },
-  {
-    "Code": "09.02.01",
-    "Generic Name": "Addyi (Flibanserin)",
-    "Form": "Tablet",
-    "Remarks": "Expanded 2025 approval for libido support in postmenopausal women.",
-    "Category": "Sexual Health - Libido"
-  },
-  {
-    "Code": "09.02.02",
-    "Generic Name": "Vyleesi (Bremelanotide)",
-    "Form": "Auto-injector",
-    "Remarks": "As-needed melanocortin agonist for female sexual desire distress.",
-    "Category": "Sexual Health - Libido"
-  },
-  {
-    "Code": "10.01.01",
-    "Generic Name": "Aprocitentan (Vascular)",
-    "Form": "Tablet",
-    "Remarks": "Relaxes endothelial arteries; improves blood flow via endothelin-1 block.",
-    "Category": "Vascular - Endothelial Health"
-  },
-  {
-    "Code": "10.01.02",
-    "Generic Name": "Vericiguat (Vascular)",
-    "Form": "Tablet",
-    "Remarks": "Enhances Nitric Oxide pathway for arterial relaxation and vasodilation.",
-    "Category": "Vascular - Endothelial Health"
-  },
-  {
-    "Code": "10.02.01",
-    "Generic Name": "QLS-111",
-    "Form": "Eye Drops",
-    "Remarks": "Potassium channel modulator (2026) that relaxes ocular vascular tissues.",
-    "Category": "Vascular - Ocular Health"
-  },
-  {
-    "Code": "10.03.01",
-    "Generic Name": "VitaFLUX (Nitric Oxide)",
-    "Form": "Capsule",
-    "Remarks": "Pharmaceutical-grade nitric oxide booster for vascular and sexual health.",
-    "Category": "Vascular - Nitric Oxide"
-  },
-  {
-    "Code": "11.01.01",
-    "Generic Name": "Androxal (Enclomiphene)",
-    "Form": "Capsule",
-    "Remarks": "Non-steroidal estrogen receptor antagonist used to treat secondary hypogonadism by boosting natural testosterone.",
-    "Category": "Endocrine - Testosterone Support"
-  }
+  {"Code": "01.01.01", "Generic Name": "Orforglipron (LY3502970)", "Form": "Tablet", "Remarks": "First non-peptide oral GLP-1 for obesity; no refrigeration or injections needed.", "Category": "Metabolic - Obesity"},
+{"Code": "01.02.01", "Generic Name": "Brenzavvy (Bexagliflozin)", "Form": "Tablet", "Remarks": "Approved 2023; SGLT2 inhibitor for glycemic control in Type 2 Diabetes.", "Category": "Metabolic - Diabetes"},
+{"Code": "01.03.01", "Generic Name": "Rybelsus (Semaglutide - High Dose)", "Form": "Tablet", "Remarks": "New 25mg/50mg oral strengths (2025) for intensive diabetes and weight control.", "Category": "Metabolic - Diabetes"},
+{"Code": "01.04.01", "Generic Name": "Zepbound (Tirzepatide)", "Form": "Injection", "Remarks": "Dual GIP/GLP-1 agonist approved for chronic weight management.", "Category": "Metabolic - Obesity"},
+{"Code": "01.05.01", "Generic Name": "Inpefa (Sotagliflozin)", "Form": "Tablet", "Remarks": "Dual SGLT1/2 inhibitor; reduces heart failure risk in diabetic/CKD patients.", "Category": "Metabolic - Heart Failure"},
+{"Code": "02.01.01", "Generic Name": "Trychio (Aprocitentan)", "Form": "Tablet", "Remarks": "First-in-class endothelin receptor antagonist for resistant hypertension.", "Category": "Cardiovascular - Hypertension"},
+{"Code": "02.02.01", "Generic Name": "Lerochol (Lerodalcibep)", "Form": "Injection", "Remarks": "Monthly fusion protein (2025) for potent LDL cholesterol reduction.", "Category": "Cardiovascular - Lipids"},
+{"Code": "02.03.01", "Generic Name": "Myqorzo (Aficamten)", "Form": "Capsule", "Remarks": "Approved late 2025 for symptomatic obstructive hypertrophic cardiomyopathy.", "Category": "Cardiovascular - Heart Muscle"},
+{"Code": "02.04.01", "Generic Name": "Cardamyst (Etripamil)", "Form": "Nasal Spray", "Remarks": "Approved 2025 for rapid conversion of SVT (fast heart rate) to sinus rhythm.", "Category": "Cardiovascular - Arrhythmia"},
+{"Code": "02.05.01", "Generic Name": "Obicetrapib", "Form": "Tablet", "Remarks": "Potent CETP inhibitor (2026) for statin-intolerant lipid management.", "Category": "Cardiovascular - Lipids"},
+{"Code": "03.01.01", "Generic Name": "Orlynvah (Sulopenem)", "Form": "Tablet", "Remarks": "Oral penem antibiotic for uncomplicated urinary tract infections (UTI).", "Category": "Infection - Antibiotic"},
+{"Code": "03.02.01", "Generic Name": "Nuzolvence (Zoliflodacin)", "Form": "Tablet", "Remarks": "First-in-class antibiotic (Dec 2025) for uncomplicated urogenital gonorrhea.", "Category": "Infection - Antibiotic"},
+{"Code": "03.03.01", "Generic Name": "Xacduro (Sulbactam/Durlobactam)", "Form": "Injection", "Remarks": "Targeted therapy for hospital-acquired Acinetobacter pneumonia.", "Category": "Infection - Antibiotic"},
+{"Code": "03.04.01", "Generic Name": "Paxlovid (Nirmatrelvir/Ritonavir)", "Form": "Tablet", "Remarks": "Full FDA approval (2023) for oral treatment of high-risk COVID-19.", "Category": "Infection - Antiviral"},
+{"Code": "03.05.01", "Generic Name": "Rezzayo (Rezafungin)", "Form": "Injection", "Remarks": "Once-weekly echinocandin for candidemia and invasive candidiasis.", "Category": "Infection - Antifungal"},
+{"Code": "04.01.01", "Generic Name": "Zavzpret (Zavegepant)", "Form": "Nasal Spray", "Remarks": "First calcitonin gene-related peptide (CGRP) spray for acute migraine.", "Category": "Neurology - Migraine"},
+{"Code": "04.02.01", "Generic Name": "Cobenfy (Xanomeline/Trospium)", "Form": "Capsule", "Remarks": "Revolutionary muscarinic antipsychotic; lacks common metabolic side effects.", "Category": "Mental Health - Schizophrenia"},
+{"Code": "04.03.01", "Generic Name": "Bysanti (Milsaperidone)", "Form": "Tablet", "Remarks": "Approved Feb 2026 for schizophrenia and bipolar I disorder episodes.", "Category": "Mental Health - Antipsychotic"},
+{"Code": "04.04.01", "Generic Name": "Auvelity (Dextromethorphan/Bupropion)", "Form": "Tablet", "Remarks": "Rapid-acting (1-week) oral antidepressant using NMDA antagonism.", "Category": "Mental Health - Depression"},
+{"Code": "04.05.01", "Generic Name": "Zurzuvae (Zuranolone)", "Form": "Capsule", "Remarks": "First oral, fast-acting (14-day course) for postpartum depression.", "Category": "Mental Health - Depression"},
+{"Code": "05.01.01", "Generic Name": "Ohtuvayre (Ensifentrine)", "Form": "Inhalation", "Remarks": "First new COPD mechanism (PDE3/4 inhibitor) in over a decade.", "Category": "Respiratory - COPD"},
+{"Code": "05.02.01", "Generic Name": "Exdensur (Depemokimab)", "Form": "Injection", "Remarks": "Ultra-long-acting IL-5 inhibitor (2025); dosed once every 6 months.", "Category": "Respiratory - Asthma"},
+{"Code": "05.03.01", "Generic Name": "Airsupra (Albuterol/Budesonide)", "Form": "Inhaler", "Remarks": "First rescue inhaler to treat both symptoms and underlying inflammation.", "Category": "Respiratory - Asthma"},
+{"Code": "05.04.01", "Generic Name": "Enflonsia (Clesrovimab)", "Form": "Injection", "Remarks": "Approved 2025 for RSV prevention in infants throughout the season.", "Category": "Respiratory - RSV"},
+{"Code": "05.05.01", "Generic Name": "Jascayd (Nerandomilast)", "Form": "Tablet", "Remarks": "Approved late 2025 for the treatment of Idiopathic Pulmonary Fibrosis.", "Category": "Respiratory - Lung Disease"},
+{"Code": "06.01.01", "Generic Name": "Veozah (Fezolinetant)", "Form": "Tablet", "Remarks": "Non-hormonal NK3 receptor antagonist for menopausal hot flashes.", "Category": "Women Health - Menopause"},
+{"Code": "06.02.01", "Generic Name": "Lynkuet (Elinzanetant)", "Form": "Tablet", "Remarks": "Dual NK1/NK3 antagonist (2025) for moderate-to-severe vasomotor symptoms.", "Category": "Women Health - Menopause"},
+{"Code": "07.01.01", "Generic Name": "Miebo (Perfluorohexyloctane)", "Form": "Eye Drops", "Remarks": "Water-free drop (2023) to target tear evaporation in dry eye.", "Category": "Ophthalmology - Dry Eye"},
+{"Code": "07.02.01", "Generic Name": "Tryptyr (Acoltremon)", "Form": "Eye Drops", "Remarks": "First-in-class medication (2025) for persistent dry eye symptoms.", "Category": "Ophthalmology - Dry Eye"},
+{"Code": "07.03.01", "Generic Name": "Vizz (Aceclidine)", "Form": "Eye Drops", "Remarks": "Approved 2025 for the treatment of presbyopia (near vision loss).", "Category": "Ophthalmology - Presbyopia"},
+{"Code": "08.01.01", "Generic Name": "Journavx (Suzetrigine)", "Form": "Tablet", "Remarks": "First selective NaV1.8 blocker (2025); non-opioid for acute pain.", "Category": "Pain - Non-Opioid"},
+{"Code": "08.02.01", "Generic Name": "Adquey (Difamilast)", "Form": "Topical", "Remarks": "Approved 2026; topical PDE4 inhibitor for mild-to-moderate eczema.", "Category": "Dermatology - Eczema"},
+{"Code": "09.01.01", "Generic Name": "Vybrique (Sildenafil)", "Form": "Oral Film", "Remarks": "Approved Feb 2026; rapid-dissolve film for faster onset of action in ED.", "Category": "Sexual Health - Erectile Dysfunction"},
+{"Code": "09.01.02", "Generic Name": "Hezkue (Sildenafil)", "Form": "Oral Spray", "Remarks": "Approved 2025/26; liquid oral suspension spray for rapid absorption.", "Category": "Sexual Health - Erectile Dysfunction"},
+{"Code": "09.02.01", "Generic Name": "Addyi (Flibanserin)", "Form": "Tablet", "Remarks": "Expanded 2025 approval for libido support in postmenopausal women.", "Category": "Sexual Health - Libido"},
+{"Code": "09.02.02", "Generic Name": "Vyleesi (Bremelanotide)", "Form": "Auto-injector", "Remarks": "As-needed melanocortin agonist for female sexual desire distress.", "Category": "Sexual Health - Libido"},
+{"Code": "10.01.01", "Generic Name": "Aprocitentan (Vascular)", "Form": "Tablet", "Remarks": "Relaxes endothelial arteries; improves blood flow via endothelin-1 block.", "Category": "Vascular - Endothelial Health"},
+{"Code": "10.01.02", "Generic Name": "Vericiguat (Vascular)", "Form": "Tablet", "Remarks": "Enhances Nitric Oxide pathway for arterial relaxation and vasodilation.", "Category": "Vascular - Endothelial Health"},
+{"Code": "10.02.01", "Generic Name": "QLS-111", "Form": "Eye Drops", "Remarks": "Potassium channel modulator (2026) that relaxes ocular vascular tissues.", "Category": "Vascular - Ocular Health"},
+{"Code": "10.03.01", "Generic Name": "VitaFLUX (Nitric Oxide)", "Form": "Capsule", "Remarks": "Pharmaceutical-grade nitric oxide booster for vascular and sexual health.", "Category": "Vascular - Nitric Oxide"},
+{"Code": "11.01.01", "Generic Name": "Androxal (Enclomiphene)", "Form": "Capsule", "Remarks": "Non-steroidal estrogen receptor antagonist used to treat secondary hypogonadism by boosting natural testosterone.", "Category": "Endocrine - Testosterone Support"}
 ];
 
         let activeCategory = 'All';
